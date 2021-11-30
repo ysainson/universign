@@ -76,7 +76,10 @@ interface ITransactionDocument {
 /**
  * Class representing a {@link ITransactionDocument}.
  */
-export class TransactionDocument extends BaseObject<ITransactionDocument> {
+export class TransactionDocument extends BaseObject<ITransactionDocument> implements ITransactionDocument {
+    readonly id: string;
+    readonly fileName: string;
+
     /**
      * Create a new instance of a `TransactionDocument`.
      * @constructor
@@ -84,5 +87,7 @@ export class TransactionDocument extends BaseObject<ITransactionDocument> {
      */
     constructor(transactionDocument: ITransactionDocument) {
         super(transactionDocument);
+        this.id = transactionDocument.id;
+        this.fileName = transactionDocument.fileName;
     }
 }

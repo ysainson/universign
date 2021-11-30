@@ -33,7 +33,10 @@ interface IIdDocument {
 /**
  * Class representing a {@link IIdDocument}.
  */
-export class IdDocument extends BaseObject<IIdDocument> {
+export class IdDocument extends BaseObject<IIdDocument> implements IIdDocument {
+    readonly photos: ArrayBuffer[];
+    readonly type: IdDocumentType;
+
     /**
      * Create a new instance of a `IdDocument`.
      * @constructor
@@ -41,5 +44,7 @@ export class IdDocument extends BaseObject<IIdDocument> {
      */
     constructor(idDocument: IIdDocument) {
         super(idDocument);
+        this.photos = idDocument.photos;
+        this.type = idDocument.type;
     }
 }

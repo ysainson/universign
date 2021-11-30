@@ -33,7 +33,10 @@ interface IRegistrationRequest {
 /**
  * Class representing a {@link IRegistrationRequest}.
  */
-export class RegistrationRequest extends BaseObject<IRegistrationRequest> {
+export class RegistrationRequest extends BaseObject<IRegistrationRequest> implements IRegistrationRequest {
+    readonly documents: ArrayBuffer[];
+    readonly type: RegistrationRequestType;
+
     /**
      * Create a new instance of a `RegistrationRequest`.
      * @constructor
@@ -41,5 +44,7 @@ export class RegistrationRequest extends BaseObject<IRegistrationRequest> {
      */
     constructor(registrationRequest: IRegistrationRequest) {
         super(registrationRequest);
+        this.documents = registrationRequest.documents;
+        this.type = registrationRequest.type;
     }
 }

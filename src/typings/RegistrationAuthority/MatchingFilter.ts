@@ -29,7 +29,10 @@ interface IMatchingFilter {
 /**
  * Class representing a {@link IMatchingFilter}.
  */
-export class MatchingFilter extends BaseObject<IMatchingFilter> {
+export class MatchingFilter extends BaseObject<IMatchingFilter>implements IMatchingFilter {
+    readonly firstname: string;
+    readonly lastname: string;
+
     /**
      * Create a new instance of a `MatchingFilter`.
      * @constructor
@@ -37,5 +40,7 @@ export class MatchingFilter extends BaseObject<IMatchingFilter> {
      */
     constructor(matchingFilter: IMatchingFilter) {
         super(matchingFilter);
+        this.firstname = matchingFilter.firstname;
+        this.lastname = matchingFilter.lastname;
     }
 }

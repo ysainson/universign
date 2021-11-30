@@ -4,7 +4,7 @@ import { IdDocument } from './IdDocument';
 import { PersonalInfo} from './PersonalInfo';
 import { ValidatorResultStatus } from './ValidatorResult';
 
-export type ValidationRequestCallbackParams = {
+type ValidationRequestCallbackParams = {
     /**
      * The callback URL.
      */
@@ -46,7 +46,10 @@ interface IValidationRequest {
 /**
  * Class representing a {@link IValidationRequest}.
  */
-export class ValidationRequest extends BaseObject<IValidationRequest> {
+export class ValidationRequest extends BaseObject<IValidationRequest> implements IValidationRequest {
+    readonly idDocument: IdDocument;
+    readonly personalInfo: PersonalInfo;
+
     /**
      * Create a new instance of a `ValidationRequest`.
      * @constructor
@@ -54,5 +57,7 @@ export class ValidationRequest extends BaseObject<IValidationRequest> {
      */
     constructor(validationRequest: IValidationRequest) {
         super(validationRequest);
+        this.idDocument = validationRequest.idDocument;
+        this.personalInfo = validationRequest.personalInfo;
     }
 }

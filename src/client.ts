@@ -1,22 +1,6 @@
 import xmlrpc, { Client } from "xmlrpc";
 
-import { Signature, RegistrationAuthority } from './typings'
-
-export enum MethodRegistrationAuthority {
-    MatchAccount = 'matcher.matchAccount'
-}
-
-export enum MethodSignature {
-    RequestTransaction = 'requester.requestTransaction',
-}
-
-type MethodRegistrationAuthorityParams = {
-    [MethodRegistrationAuthority.MatchAccount]: RegistrationAuthority.MatchingFilter;
-}
-
-type MethodSignatureParams = {
-    [MethodSignature.RequestTransaction]: Signature.TransactionRequest;
-}
+import { RegistrationAuthority } from './typings'
 
 type Credentials = {
     /** The email address associated to the Universign account. */
@@ -48,7 +32,7 @@ interface ClientConfig {
 }
 
 /** Class representing a universign client. */
-class UniversignClient<Method extends string, Params> {
+class UniversignClient<Method extends string, Params, Response> {
     private readonly config: ClientConfig;
     private readonly xmlrpcClient: Client;
 
@@ -71,10 +55,10 @@ class UniversignClient<Method extends string, Params> {
         }
     }
 
-    async call(method: Method, params: Params[]) {
+    async call(method: Method, params: Params): Promise<Response> {
         console.log(method, params);
         return new Promise((resolve, reject) => {
-            this.xmlrpcClient.methodCall(method, params, (error, value) => {
+            this.xmlrpcClient.methodCall(method, [params], (error, value) => {
                 if (error) {
                     return reject(error);
                 }
@@ -84,22 +68,16 @@ class UniversignClient<Method extends string, Params> {
     }
 }
 
-export class SignatureClient extends UniversignClient<MethodSignature, MethodSignatureParams[MethodSignature]> {
-    constructor(config: ClientConfig) {
-        super({ path: '/sign/rpc/', ...config });
-    }
-
-    async call(method: MethodSignature, params: MethodSignatureParams[MethodSignature][]) {
-        return super.call(method, params);
-    }
-}
-
-export class RegistrationAuthorityClient extends UniversignClient<MethodRegistrationAuthority, MethodRegistrationAuthorityParams[MethodRegistrationAuthority]> {
+export class RegistrationAuthorityClient extends UniversignClient<
+    RegistrationAuthority.Method,
+    RegistrationAuthority.Params<RegistrationAuthority.Method>,
+    RegistrationAuthority.Response<RegistrationAuthority.Method>
+> {
     constructor(config: ClientConfig) {
         super({ path: '/ra/rpc/', ...config });
     }
 
-    async call(method: MethodRegistrationAuthority, params: MethodRegistrationAuthorityParams[MethodRegistrationAuthority][]) {
+    async call<M extends RegistrationAuthority.Method>(method: M, params: RegistrationAuthority.Params<M>): Promise<RegistrationAuthority.Response<M>> {
         return super.call(method, params);
     }
 }

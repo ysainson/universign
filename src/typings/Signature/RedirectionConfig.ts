@@ -17,7 +17,10 @@ interface IRedirectionConfig {
 /**
  * Class representing a {@link IRedirectionConfig}.
  */
-export class RedirectionConfig extends BaseObject<IRedirectionConfig> {
+export class RedirectionConfig extends BaseObject<IRedirectionConfig> implements IRedirectionConfig {
+    readonly URL: string;
+    readonly displayName: string;
+
     /**
      * Create a new instance of a `RedirectionConfig`.
      * @constructor
@@ -25,5 +28,7 @@ export class RedirectionConfig extends BaseObject<IRedirectionConfig> {
      */
     constructor(redirectionConfig: IRedirectionConfig) {
         super(redirectionConfig);
+        this.URL = redirectionConfig.URL;
+        this.displayName = redirectionConfig.displayName;
     }
 }

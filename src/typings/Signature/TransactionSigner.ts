@@ -160,7 +160,7 @@ interface ITransactionSigner {
 /**
  * Class representing a {@link ITransactionSigner}.
  */
-export class TransactionSigner extends BaseObject<ITransactionSigner> {
+export class TransactionSigner extends BaseObject<ITransactionSigner> implements ITransactionSigner {
     /**
      * Create a new instance of a `TransactionSigner`.
      * @constructor

@@ -38,7 +38,10 @@ interface ITransactionRequest {
 /**
  * Class representing a {@link ITransactionRequest}.
  */
-export class TransactionRequest extends BaseObject<ITransactionRequest> {
+export class TransactionRequest extends BaseObject<ITransactionRequest> implements ITransactionRequest {
+    readonly signers: TransactionSigner[];
+    readonly documents: TransactionDocument[];
+
     /**
      * Create a new instance of a `TransactionRequest`.
      * @constructor
@@ -46,5 +49,7 @@ export class TransactionRequest extends BaseObject<ITransactionRequest> {
      */
     constructor(transactionRequest: ITransactionRequest) {
         super(transactionRequest);
+        this.signers = transactionRequest.signers;
+        this.documents = transactionRequest.documents;
     }
 }

@@ -21,7 +21,11 @@ interface IPersonalInfo {
 /**
  * Class representing a {@link IPersonalInfo}.
  */
-export class PersonalInfo extends BaseObject<IPersonalInfo> {
+export class PersonalInfo extends BaseObject<IPersonalInfo> implements IPersonalInfo {
+    readonly firstname: string;
+    readonly lastname: string;
+    readonly birthDate: Date;
+
     /**
      * Create a new instance of a `PersonalInfo`.
      * @constructor
@@ -29,5 +33,8 @@ export class PersonalInfo extends BaseObject<IPersonalInfo> {
      */
     constructor(personalInfo: IPersonalInfo) {
         super(personalInfo);
+        this.firstname = personalInfo.firstname;
+        this.lastname = personalInfo.lastname;
+        this.birthDate = personalInfo.birthDate;
     }
 }
