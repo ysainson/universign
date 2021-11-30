@@ -23,7 +23,7 @@ interface IRegistrationRequest {
      * List of ID documents to use to register the signer.
      * The number of these documents is indicated in the following comment.
      */
-    documents: ArrayBuffer[];
+    documents: Buffer[];
     /**
      * The type of the provided ID documents.
      */
@@ -34,7 +34,7 @@ interface IRegistrationRequest {
  * Class representing a {@link IRegistrationRequest}.
  */
 export class RegistrationRequest extends BaseObject<IRegistrationRequest> implements IRegistrationRequest {
-    readonly documents: ArrayBuffer[];
+    readonly documents: Buffer[];
     readonly type: RegistrationRequestType;
 
     /**

@@ -37,7 +37,7 @@ interface ITransactionDocument {
      * The raw content of the PDF document.
      * You can provide the document using the `url` field, otherwise this field is **mandatory**.
      */
-    content?: ArrayBuffer;
+    content?: Buffer;
     /**
      * The URL to download the PDF document. Note that this field is **mandatory** if the `content` is not set.
      */

@@ -36,7 +36,7 @@ type MethodRequestMapping = {
     };
     [Method.GetCertificateAgreement]: {
         param: string;
-        response: ArrayBuffer;
+        response: Buffer;
     };
     [Method.RevokeCertificate]: {
         param: string;

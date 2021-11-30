@@ -23,7 +23,7 @@ interface IIdDocument {
      * List of ID documents to be validated. The number of these documents is indicated in the following comment.
      * The max size of each photo is 5MB.
      */
-    photos: ArrayBuffer[];
+    photos: Buffer[];
     /**
      * The type of the provided ID documents.
      */
@@ -34,7 +34,7 @@ interface IIdDocument {
  * Class representing a {@link IIdDocument}.
  */
 export class IdDocument extends BaseObject<IIdDocument> implements IIdDocument {
-    readonly photos: ArrayBuffer[];
+    readonly photos: Buffer[];
     readonly type: IdDocumentType;
 
     /**

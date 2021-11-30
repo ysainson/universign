@@ -15,5 +15,5 @@ export interface CertificateInfo {
      * The whole chain of the certificate.
      * The first element in the array is the root certificate and the last element is the end entity.
      */
-    chain: ArrayBuffer[];
+    chain: Buffer[];
 }
