@@ -62,13 +62,13 @@ export interface ValidatorResult {
     /**
      * In case of failure, this fields presents the error number, **null** otherwise.
      */
-    reason: ValidatorResultReason | null;
+    reason: ValidatorResultReason | 0;
     /**
      * In case of failure, gives more information about the failure.
      */
-    reasonMessage: string;
+    reasonMessage?: string;
     /**
      * In case of failure, this data structure will contain the list of the failing zones, **null** otherwise.
      */
-    result: ValidatorResultStruct | null;
+    result: ValidatorResultStruct | {};
 }

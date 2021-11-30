@@ -3,6 +3,7 @@ import { BaseObject } from "../BaseObject";
 import { Language } from "./Language";
 import { RedirectionConfig } from "./RedirectionConfig";
 import { RegistrationRequest } from './RegistrationRequest';
+import { RedirectPolicy } from './RedirectPolicy';
 
 export enum TransactionSignerRole {
     /**
@@ -28,17 +29,6 @@ export enum TransactionSignerCertificateType {
      * Allows signers to perform a simple signature.
      */
     Simple = 'simple',
-}
-
-export enum TransactionSignerRedirectPolicy {
-    /**
-     * The redirection page displays the signed pages.
-     */
-    Dashboard = 'dashboard',
-    /**
-     * The redirection page does not display the signed pages.
-     */
-    Quick = 'quick'
 }
 
 /**
@@ -78,14 +68,14 @@ interface ITransactionSigner {
     phoneNum?: string;
     /**
      * The language for the signer’s transaction.
-     * @default {@link Language.English}
+     * @default {@link English}
      */
     language?: Language;
     /**
      * The role of this transaction actor.
-     * @default {@link TransactionSignerRole.Signer}
+     * @default {@link Signer}
      */
-    role?: string;
+    role?: TransactionSignerRole;
     /**
      * This signer’s birth date. This is an option for the **certified** signature,
      * if it’s set, the user won’t be asked to provide it’s birth date during the RA workflow.
@@ -112,7 +102,7 @@ interface ITransactionSigner {
     /**
      * Indicates which certificate type will be used to perform the signature and
      * therefore which type of signature will be performed by this signer.
-     * @default {@link TransactionSignerCertificateType.Simple}
+     * @default {@link Simple}
      */
     certificateType?: TransactionSignerCertificateType;
     /**
@@ -131,9 +121,9 @@ interface ITransactionSigner {
      * This option allow to customize the way signers are redirect after signing documents.
      *
      * If this field is not specified, field set in {@link TransactionRequest} is used.
-     * @default {@link TransactionSignerRedirectPolicy.Dashboard}
+     * @default {@link Dashboard}
      */
-    redirectPolicy?: string;
+    redirectPolicy?: RedirectPolicy;
     /**
      * The waiting time in seconds for signers to be redirected if _`redirectPolicy`_ is dashboard.
      *

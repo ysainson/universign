@@ -1,5 +1,8 @@
 import { BaseObject } from "../BaseObject";
 
+import { DocSignatureField } from './DocSignatureField';
+import { SEPAData } from './SEPAData';
+
 export enum TransactionDocumentType {
     /**
      * Makes all `TransactionDocument` members relevant, except for `SEPAData`.
@@ -30,9 +33,9 @@ interface ITransactionDocument {
     id: string;
     /**
      * This `TransactionDocument` type.
-     * @default {@link TransactionDocumentType.PDF}
+     * @default {@link PDF}
      */
-    documentType?: string;
+    documentType?: TransactionDocumentType;
     /**
      * The raw content of the PDF document.
      * You can provide the document using the `url` field, otherwise this field is **mandatory**.
@@ -48,14 +51,13 @@ interface ITransactionDocument {
     fileName: string;
     /**
      * A description of a visible PDF signature field.
-     * @todo Implement the type
      */
-    signatureFields?: unknown;
+    signatureFields?: DocSignatureField[];
     /**
      * Texts of the agreement checkboxes.
      * The last one should be the text of the checkbox related to signature fields labels agreement.
-     * This attribute should not be used with documents of the type {@link TransactionDocumentType.PDF_FOR_PRESENTATION}.
-     * Since agreement for {@link TransactionDocumentType.PDF_FOR_PRESENTATION} is not customisable.
+     * This attribute should not be used with documents of the type {@link PDF_FOR_PRESENTATION}.
+     * Since agreement for {@link PDF_FOR_PRESENTATION} is not customisable.
      */
     checkBoxTexts?: string[];
     /**
@@ -68,9 +70,8 @@ interface ITransactionDocument {
     title?: string;
     /**
      * A structure containing data to create a SEPA mandate PDF.
-     * @todo Implement the type
      */
-    SEPAData?: unknown;
+    SEPAData?: SEPAData;
 }
 
 /**

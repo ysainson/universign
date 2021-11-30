@@ -1,6 +1,6 @@
 import xmlrpc, { Client } from "xmlrpc";
 
-import { RegistrationAuthority } from './typings'
+import { RegistrationAuthority, Signature } from './typings'
 
 type Credentials = {
     /** The email address associated to the Universign account. */
@@ -31,8 +31,10 @@ interface ClientConfig {
     isSecure?: boolean;
 }
 
+type Params<P> = { params: P };
+
 /** Class representing a universign client. */
-class UniversignClient<Method extends string, Params, Response> {
+class UniversignClient<Method extends string, ParamsType, ResponseType> {
     private readonly config: ClientConfig;
     private readonly xmlrpcClient: Client;
 
@@ -55,10 +57,10 @@ class UniversignClient<Method extends string, Params, Response> {
         }
     }
 
-    async call(method: Method, params: Params): Promise<Response> {
+    async call(method: Method, { params }: Params<ParamsType>): Promise<ResponseType> {
         console.log(method, params);
         return new Promise((resolve, reject) => {
-            this.xmlrpcClient.methodCall(method, [params], (error, value) => {
+            this.xmlrpcClient.methodCall(method, Array.isArray(params) ? params : [params], (error, value) => {
                 if (error) {
                     return reject(error);
                 }
@@ -77,7 +79,27 @@ export class RegistrationAuthorityClient extends UniversignClient<
         super({ path: '/ra/rpc/', ...config });
     }
 
-    async call<M extends RegistrationAuthority.Method>(method: M, params: RegistrationAuthority.Params<M>): Promise<RegistrationAuthority.Response<M>> {
-        return super.call(method, params);
+    async call<M extends RegistrationAuthority.Method>(
+        method: M,
+        { params }: Params<RegistrationAuthority.Params<M>>
+    ): Promise<RegistrationAuthority.Response<M>> {
+        return super.call(method, { params });
+    }
+}
+
+export class SignatureClient extends UniversignClient<
+    Signature.Method,
+    Signature.Params<Signature.Method>,
+    Signature.Response<Signature.Method>
+    > {
+    constructor(config: ClientConfig) {
+        super({ path: '/ra/rpc/', ...config });
+    }
+
+    async call<M extends Signature.Method>(
+        method: M,
+        { params }: Params<Signature.Params<M>>
+    ): Promise<Signature.Response<M>> {
+        return super.call(method, { params });
     }
 }
