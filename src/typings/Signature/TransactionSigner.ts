@@ -82,7 +82,7 @@ interface ITransactionSigner {
      *
      * When using validationSessionId, it must be set to the same value than the one used in the validation request.
      */
-    birthDate?: string;
+    birthDate?: Date;
     /**
      * An external identifier given by the organization that indicates this signer.
      */

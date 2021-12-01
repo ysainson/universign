@@ -93,7 +93,7 @@ export class SignatureClient extends UniversignClient<
     Signature.Response<Signature.Method>
     > {
     constructor(config: ClientConfig) {
-        super({ path: '/ra/rpc/', ...config });
+        super({ path: '/sign/rpc/', ...config });
     }
 
     async call<M extends Signature.Method>(

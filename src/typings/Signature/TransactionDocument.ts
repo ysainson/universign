@@ -30,7 +30,7 @@ interface ITransactionDocument {
     /**
      * A unique identifier of this document.
      */
-    id: string;
+    id: number;
     /**
      * This `TransactionDocument` type.
      * @default {@link PDF}
@@ -78,7 +78,7 @@ interface ITransactionDocument {
  * Class representing a {@link ITransactionDocument}.
  */
 export class TransactionDocument extends BaseObject<ITransactionDocument> implements ITransactionDocument {
-    readonly id: string;
+    readonly id: number;
     readonly fileName: string;
 
     /**
