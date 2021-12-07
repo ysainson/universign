@@ -1,5 +1,5 @@
 {
-  "name": "@ysainson/universign",
+  "name": "universign",
   "version": "0.0.1",
   "description": "Unofficial Universign NodeJS Client",
   "author": {
