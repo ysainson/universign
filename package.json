@@ -2,6 +2,11 @@
   "name": "@ysainson/universign",
   "version": "0.0.1",
   "description": "Unofficial Universign NodeJS Client",
+  "author": {
+    "email": "me@yannsainson.com",
+    "name": "Yann Sainson",
+    "url": "https://yannsainson.com"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -16,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/ysainson/universign/issues"
   },
-  "homepage": "https://github.com/ysainson/universign",
+  "homepage": "https://github.com/ysainson/universign#readme",
   "devDependencies": {
     "@types/node": "^16.11.9",
     "@types/xmlrpc": "^1.3.7",
